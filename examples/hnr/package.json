@@ -12,7 +12,8 @@
         "@grainular/grains": "^2.0.0",
         "@grainular/nord": "^2.0.0",
         "@grainular/resource": "^2.0.0",
-        "@grainular/router": "^2.0.0"
+        "@grainular/router": "^2.0.0",
+        "dompurify": "3.4.13"
     },
     "devDependencies": {
         "typescript": "~7.0.2",

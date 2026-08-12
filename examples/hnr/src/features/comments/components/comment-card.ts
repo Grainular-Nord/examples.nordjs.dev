@@ -1,6 +1,7 @@
 import { grain } from '@grainular/grains';
-import { $each, $if, $unsafeHtml, html, on } from '@grainular/nord';
+import { $each, $if, html, on } from '@grainular/nord';
 import type { Comment } from '../models/comment.model';
+import { $SanitizedHtml } from '../../../shared/structs/sanitized-html.struct';
 import './comment-card.css';
 
 export type CommentCardProps = Comment & {};
@@ -39,7 +40,7 @@ export const CommentCard = (props: CommentCardProps) => {
                     return html` <button ${on('click', handleToggleCollapse(false))}>Show more</button>`;
                 })}
             </div>
-            <div data-collapsed="${collapsed}">${$unsafeHtml(props.content)}</div>
+            <div data-collapsed="${collapsed}">${$SanitizedHtml(props.content)}</div>
         </div>
         <div data-collapsed="${collapsed}">${$each(() => props.comments).$as(CommentCard)}</div>
     </div>`;

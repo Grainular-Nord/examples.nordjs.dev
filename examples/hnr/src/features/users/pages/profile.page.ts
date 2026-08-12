@@ -1,6 +1,7 @@
 import { derived } from '@grainular/grains';
-import { $if, $unsafeHtml, html, on } from '@grainular/nord';
+import { $if, html, on } from '@grainular/nord';
 import { Icon, icons } from '../../../shared/components/icon';
+import { $SanitizedHtml } from '../../../shared/structs/sanitized-html.struct';
 import { PageHeader } from '../../../shared/components/page-header';
 import { StickyContainer } from '../../../shared/components/sticky-container';
 import { userState } from '../stores/user.store';
@@ -29,7 +30,7 @@ export default () => {
                         <span class="item"> ${Icon({ src: icons.celebration, size: 16 })} ${karma}</span>
                         <span class="item"> ${Icon({ src: icons.comment, size: 16 })} ${submitted?.length ?? 0} </span>
                     </div>
-                    <div>${$unsafeHtml(about ?? '')}</div>
+                    <div>${$SanitizedHtml(about ?? '')}</div>
                 `;
             })}
         </div>
