@@ -1,0 +1,13 @@
+{
+    "$schema": "./node_modules/oxlint/configuration_schema.json",
+    "categories": {
+        "correctness": "error",
+        "suspicious": "error"
+    },
+    "rules": {
+        "no-shadow": "off",
+        "unicorn/no-useless-spread": "error",
+        "no-unused-expressions": "error",
+        "unicorn/consistent-function-scoping": "off"
+    }
+}

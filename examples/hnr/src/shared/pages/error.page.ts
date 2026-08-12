@@ -17,7 +17,7 @@ export default () => {
         <div class="error-page">
             <div class="error-code">${message}</div>
             <div>Oh no! Something went wrong.</div>
-            <a href="/feed/news">Go home</a>
+            <a href="${import.meta.env.BASE_URL}feed/news">Go home</a>
         </div>
     `;
 };

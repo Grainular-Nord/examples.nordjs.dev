@@ -85,7 +85,7 @@ const nextSimulationStep = () => {
     let trackAlive = 0;
     iterateCells((cell, [x, y]) => {
         cell.set(nextBatch[x][y]);
-        nextBatch[x][y] && trackAlive++;
+        if (nextBatch[x][y]) trackAlive++;
     });
 
     // We set the alive cell count once to avoid unnecessary updates.
@@ -108,7 +108,7 @@ const previousSimulationStep = () => {
     let trackAlive = 0;
     iterateCells((cell, [x, y]) => {
         cell.set(lastBatch[x][y]);
-        lastBatch[x][y] && trackAlive++;
+        if (lastBatch[x][y]) trackAlive++;
     });
 
     alive.set(trackAlive);
@@ -168,7 +168,7 @@ const randomizeCells = () => {
         for (const cell of row) {
             const state = !!Math.round(Math.random() - 0.25);
             cell.set(state);
-            state && trackAlive++;
+            if (state) trackAlive++;
         }
     }
     alive.set(trackAlive);

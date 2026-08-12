@@ -14,7 +14,7 @@ export default () => {
     // On init, check if params are defined, otherwise
     // redirect to the newest feed.
     if (!state.currentFeed()) {
-        navigate('/feed/news');
+        navigate(`${import.meta.env.BASE_URL}feed/news`);
     }
 
     return html`

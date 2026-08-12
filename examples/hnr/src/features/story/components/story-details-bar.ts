@@ -17,7 +17,7 @@ export const StoryDetailsBar = (props: StoryDetailBarProps) => {
             return html`
                 <span class="detail">
                     ${Icon({ src: icons.user, size: 16 })}
-                    <a class="secondary-link" href="/user/${props.user}">${props.user}</a>
+                    <a class="secondary-link" href="${import.meta.env.BASE_URL}user/${props.user}">${props.user}</a>
                 </span>
             `;
         })}

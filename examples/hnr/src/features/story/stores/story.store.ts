@@ -11,7 +11,7 @@ const fetchStory = async (id: number) => {
 
     const response = await fetch(`https://node-hnapi.herokuapp.com/item/${id}`, { signal: controller.signal });
     if (!response.ok) {
-        return navigate(`/error/${response.status}`);
+        return navigate(`${import.meta.env.BASE_URL}error/${response.status}`);
     }
     const story = await response.json();
     store.set(story);

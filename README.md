@@ -12,7 +12,7 @@ Standalone applications built with [Nørd](https://nordjs.dev).
 
 ```bash
 npm install
-npm run dev:example --workspace=examples-nord-game-of-life
+npm run dev:example --workspace=@examples/game-of-life
 npm run build
 ```
 

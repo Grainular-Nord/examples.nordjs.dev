@@ -14,7 +14,7 @@ const fetchUser = async (id: string) => {
     });
 
     if (!response.ok) {
-        return navigate(`/error/${response.status}`);
+        return navigate(`${import.meta.env.BASE_URL}error/${response.status}`);
     }
 
     const story = await response.json();

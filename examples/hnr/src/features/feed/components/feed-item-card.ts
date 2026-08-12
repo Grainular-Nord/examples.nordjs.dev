@@ -12,7 +12,7 @@ export const FeedItemCard = (props: FeedItemCardProps) => {
         ([page, rank]) => rank + 1 + (page - 1) * 30,
     );
 
-    return html` <a id="${props.id}" class="feed-item" href="/story/${props.id}">
+    return html` <a id="${props.id}" class="feed-item" href="${import.meta.env.BASE_URL}story/${props.id}">
         <h3>${rank}: ${props.title}</h3>
         ${StoryDetailsBar({ ...props })}
     </a>`;

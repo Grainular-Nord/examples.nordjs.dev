@@ -28,7 +28,7 @@ const feedResource = resource(
         });
 
         if (!response.ok) {
-            navigate(`/error/${response.status}`);
+            navigate(`${import.meta.env.BASE_URL}error/${response.status}`);
             return [];
         }
 

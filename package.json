@@ -1,10 +1,22 @@
 {
     "name": "@grainular/nord-examples",
     "private": true,
+    "workspaces": [
+        "examples/*"
+    ],
     "type": "module",
-    "workspaces": ["examples/*"],
     "scripts": {
-        "build": "npm run build:example --workspaces --if-present"
+        "build": "npm run build:example --workspaces --if-present",
+        "format": "oxfmt . --write",
+        "format:check": "oxfmt . --check",
+        "lint": "oxlint .",
+        "typecheck": "tsc --noEmit --project examples/forms/tsconfig.json && tsc --noEmit --project examples/game-of-life/tsconfig.json && tsc --noEmit --project examples/hnr/tsconfig.json && tsc --noEmit --project examples/minesweeper/tsconfig.json && tsc --noEmit --project examples/tic-tac-toe/tsconfig.json",
+        "check": "npm run format:check && npm run lint && npm run typecheck"
+    },
+    "devDependencies": {
+        "oxfmt": "0.60.0",
+        "oxlint": "1.75.0",
+        "vite": "^8.2.1"
     },
     "packageManager": "npm@11.6.0"
 }

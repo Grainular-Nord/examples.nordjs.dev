@@ -2,17 +2,17 @@ import { createRouter, pre } from '@grainular/router';
 import { storyState } from './features/story/stores/story.store.ts';
 import { userState } from './features/users/stores/user.store.ts';
 
-export const { query, params, ...router } = createRouter('/', [
+export const { query, params, ...router } = createRouter(import.meta.env.BASE_URL, [
     {
         path: '',
         component: () => import('./features/feed/pages/feed.page.ts'),
     },
     {
-        path: '/feed/:feed',
+        path: 'feed/:feed',
         component: () => import('./features/feed/pages/feed.page.ts'),
     },
     {
-        path: '/story/:storyId',
+        path: 'story/:storyId',
         component: () => import('./features/story/pages/story.page.ts'),
         use: [
             pre((ctx) => {
@@ -22,7 +22,7 @@ export const { query, params, ...router } = createRouter('/', [
         ],
     },
     {
-        path: '/user/:userId',
+        path: 'user/:userId',
         component: () => import('./features/users/pages/profile.page.ts'),
         use: [
             pre((ctx) => {
@@ -32,7 +32,7 @@ export const { query, params, ...router } = createRouter('/', [
         ],
     },
     {
-        path: '/error/:code',
+        path: 'error/:code',
         component: () => import('./shared/pages/error.page.ts'),
     },
     {

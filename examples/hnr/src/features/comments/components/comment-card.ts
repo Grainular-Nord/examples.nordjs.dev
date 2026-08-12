@@ -29,7 +29,10 @@ export const CommentCard = (props: CommentCardProps) => {
         <div class="comment-content">
             <div class="comment-details">
                 ${props.time_ago} by
-                <a class="secondary-link" href="/user/${props.user}" ${on('click', (e) => e.stopPropagation())}
+                <a
+                    class="secondary-link"
+                    href="${import.meta.env.BASE_URL}user/${props.user}"
+                    ${on('click', (e) => e.stopPropagation())}
                     >${props.user}</a
                 >
                 ${$if(collapsed).$then(() => {

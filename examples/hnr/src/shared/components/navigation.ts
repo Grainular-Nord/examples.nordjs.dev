@@ -32,7 +32,9 @@ export const Navigation = () => {
                 ${$each(() => items).$as((item) => {
                     return html`
                         <li class="navigation-item">
-                            <a href="/feed/${item.type}" ${active('link-active')}>${item.label}</a>
+                            <a href="${import.meta.env.BASE_URL}feed/${item.type}" ${active('link-active')}
+                                >${item.label}</a
+                            >
                         </li>
                     `;
                 })}

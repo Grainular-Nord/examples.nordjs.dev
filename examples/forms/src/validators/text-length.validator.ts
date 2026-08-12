@@ -9,7 +9,8 @@ export const maxTextLength: Validator<{ length: number }, string | null> = creat
             return clearError();
         }
 
-        value.trim().length > length ? setError() : clearError();
+        if (value.trim().length > length) setError();
+        else clearError();
     },
 );
 
@@ -22,6 +23,7 @@ export const minTextLength: Validator<{ length: number }, string | null> = creat
             return clearError();
         }
 
-        value.trim().length < length ? setError() : clearError();
+        if (value.trim().length < length) setError();
+        else clearError();
     },
 );
