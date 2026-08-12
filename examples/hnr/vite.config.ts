@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-    base: '/examples/hnr/',
+    base: process.env.CF_PAGES ? '/' : '/examples/hnr/',
 });
