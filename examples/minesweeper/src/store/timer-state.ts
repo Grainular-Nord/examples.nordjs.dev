@@ -1,51 +1,33 @@
 import { grain, readonly } from '@grainular/grains';
 
-const initial = grain(0);
-const time = grain(0);
-const state = grain<'stopped' | 'running'>('stopped');
+const time = grain<number | null>(0);
+let interval: number | undefined;
 
-let interval: number | null = null;
-
-state.subscribe((currentState) => {
-    // Clear existing interval to prevent leaks
-    if (interval) {
-        clearInterval(interval);
-        interval = null;
-    }
-
-    if (currentState !== 'running') return;
-
-    interval = window.setInterval(() => {
-        const remaining = time();
-
-        // Guard clause for countdown completion
-        if (remaining <= 0) {
-            state.set('stopped');
-            return;
-        }
-
-        time.set(remaining - 1);
-    }, 1000);
-});
+const stopTimer = () => {
+    if (interval === undefined) return;
+    clearInterval(interval);
+    interval = undefined;
+};
 
 export const timer = {
-    setTimer: (value: number) => {
-        initial.set(value);
+    setTimer: (value: number | null) => {
+        stopTimer();
         time.set(value);
     },
-    resetTimer: () => {
-        state.set('stopped');
-        time.set(initial());
+    startTimer: (onElapsed: () => void) => {
+        const current = time();
+        if (interval !== undefined || current === null || current <= 0) return;
+        interval = window.setInterval(() => {
+            const current = time();
+            if (current === null) return;
+            const next = current - 1;
+            time.set(Math.max(0, next));
+            if (next <= 0) {
+                stopTimer();
+                onElapsed();
+            }
+        }, 1000);
     },
-    startTimer: () => {
-        // Only start if there is time to count down
-        if (time() > 0) {
-            state.set('running');
-        }
-    },
-    stopTimer: () => {
-        state.set('stopped');
-    },
+    stopTimer,
     time: readonly(time),
-    state: readonly(state),
 };
