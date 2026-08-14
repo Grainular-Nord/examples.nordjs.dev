@@ -28,17 +28,15 @@
                 margin: 0 auto;
                 padding: clamp(4rem, 12vw, 8rem) 0;
             }
-
             .eyebrow {
                 margin: 0 0 1rem;
                 color: #8ef1dc;
-                font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+                font-family: ui-monospace, monospace;
                 font-size: 0.8rem;
                 font-weight: 700;
                 letter-spacing: 0.12em;
                 text-transform: uppercase;
             }
-
             h1 {
                 max-width: 12ch;
                 margin: 0;
@@ -49,7 +47,6 @@
                 letter-spacing: -0.07em;
                 line-height: 0.9;
             }
-
             .intro {
                 max-width: 38rem;
                 margin: 1.75rem 0 3rem;
@@ -57,7 +54,6 @@
                 font-size: clamp(1.05rem, 2vw, 1.25rem);
                 line-height: 1.6;
             }
-
             ul {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
@@ -66,8 +62,7 @@
                 padding: 0;
                 list-style: none;
             }
-
-            a {
+            .example-link {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
@@ -85,33 +80,66 @@
                     background 160ms ease,
                     transform 160ms ease;
             }
-
-            a::after {
+            .example-link::after {
                 content: '↗';
                 color: #8ef1dc;
                 font-size: 1.4rem;
             }
-
-            a:hover,
-            a:focus-visible {
+            .example-link:hover,
+            .example-link:focus-visible {
                 border-color: rgb(142 241 220 / 60%);
                 background: rgb(255 255 255 / 11%);
                 outline: none;
                 transform: translateY(-0.2rem);
             }
+            .source-link {
+                display: inline-block;
+                margin-top: 2rem;
+                color: #c5c8d4;
+                font:
+                    700 0.8rem ui-monospace,
+                    monospace;
+                text-underline-offset: 0.3rem;
+            }
+            .source-link:hover,
+            .source-link:focus-visible {
+                color: #8ef1dc;
+            }
         </style>
     </head>
     <body>
-        <main>
-            <h1>Nørd examples</h1>
-            <p class="intro">Small applications built with Nørd. Pick one, open the source, and make it your own.</p>
-            <ul aria-label="Examples">
-                <li><a href="./forms/">Forms</a></li>
-                <li><a href="./game-of-life/">Game of Life</a></li>
-                <li><a href="./hnr/">Hacker News Reader</a></li>
-                <li><a href="./minesweeper/">Minesweeper</a></li>
-                <li><a href="./tic-tac-toe/">Tic-Tac-Toe</a></li>
-            </ul>
-        </main>
+        <div id="app"></div>
+        <script src="https://unpkg.com/@grainular/nord@2.0.0/dist/browser/index.global.js"></script>
+        <script>
+            const { $each, html, mount } = Nord;
+            const examples = [
+                ['Forms', './forms/'],
+                ['Game of Life', './game-of-life/'],
+                ['Hacker News Reader', './hnr/'],
+                ['Minesweeper', './minesweeper/'],
+                ['Tic-Tac-Toe', './tic-tac-toe/'],
+            ];
+            const App = () => html`
+                <main>
+                    <p class="eyebrow">Nørd / no build step</p>
+                    <h1>Nørd examples</h1>
+                    <p class="intro">
+                        This gallery is a Nørd app written directly in HTML and loaded from unpkg—no bundler, compiler,
+                        or local install required.
+                    </p>
+                    <ul aria-label="Examples">
+                        ${$each(() => examples).$as(([label, href]) => html`<li><a class="example-link" href="${href}">${label}</a></li>`)}
+                    </ul>
+                    <a
+                        class="source-link"
+                        href="https://github.com/Grainular-Nord/examples/blob/main/index.html"
+                        target="_blank"
+                        rel="noreferrer"
+                        >View this page’s source</a
+                    >
+                </main>
+            `;
+            mount(App, { to: document.querySelector('#app') });
+        </script>
     </body>
 </html>
